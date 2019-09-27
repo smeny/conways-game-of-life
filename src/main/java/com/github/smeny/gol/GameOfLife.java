@@ -23,7 +23,8 @@ class GameOfLife {
 
     private boolean determineCellLiveliness(int row, int column) {
         int neighbourCount = countCellNeighbours(row, column);
-        return isCellAlive(row, column) && neighbourCount >= 2 && neighbourCount <= 3;
+        return (isCellAlive(row, column) && (neighbourCount == 2 || neighbourCount == 3)) ||
+                (!isCellAlive(row, column) && neighbourCount == 3) ;
     }
 
     private int countCellNeighbours(int row, int column) {

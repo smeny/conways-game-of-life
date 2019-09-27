@@ -11,9 +11,9 @@ class GameOfLifeTest {
     @Test
     void aliveCellWithFewerThanTwoLivingNeighboursDies() {
         var initialBoard = new boolean[][]{
-                {false, false, true},
+                {false, false, false},
                 {false, true, false},
-                {true, false, false}
+                {false, false, false}
         };
         game = new GameOfLife(initialBoard);
 
@@ -21,7 +21,7 @@ class GameOfLifeTest {
 
         var expected = new boolean[][]{
                 {false, false, false},
-                {false, true, false},
+                {false, false, false},
                 {false, false, false}
         };
         assertArrayEquals(expected, game.getBoard());
@@ -39,9 +39,9 @@ class GameOfLifeTest {
         game.nextGen();
 
         var expected = new boolean[][]{
-                {false, false, false},
+                {false, true, false},
                 {true, true, false},
-                {true, false, false}
+                {true, true, false}
         };
         assertArrayEquals(expected, game.getBoard());
     }
@@ -60,7 +60,26 @@ class GameOfLifeTest {
         var expected = new boolean[][]{
                 {true, false, false},
                 {true, false, false},
-                {true, false, false}
+                {true, true, false}
+        };
+        assertArrayEquals(expected, game.getBoard());
+    }
+
+    @Test
+    void deadCellWithExactlyThreeLivingNeighboursLives() {
+        var initialBoard = new boolean[][]{
+                {true, true, false},
+                {true, false, false},
+                {false, false, false}
+        };
+        game = new GameOfLife(initialBoard);
+
+        game.nextGen();
+
+        var expected = new boolean[][]{
+                {true, true, false},
+                {true, true, false},
+                {false, false, false}
         };
         assertArrayEquals(expected, game.getBoard());
     }
