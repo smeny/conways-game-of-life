@@ -10,7 +10,7 @@ class GameOfLifeTest {
 
     @Test
     void cellWithFewerThanTwoLivingNeighboursDies() {
-        final boolean[][] initialBoard = new boolean[][]{
+        var initialBoard = new boolean[][]{
                 {false, false, true},
                 {false, true, false},
                 {true, false, false}
@@ -19,7 +19,7 @@ class GameOfLifeTest {
 
         game.nextGen();
 
-        final boolean[][] expected = new boolean[][]{
+        var expected = new boolean[][]{
                 {false, false, false},
                 {false, true, false},
                 {false, false, false}

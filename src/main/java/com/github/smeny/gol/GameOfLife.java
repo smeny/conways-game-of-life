@@ -13,28 +13,28 @@ class GameOfLife {
 
     public void nextGen() {
         boolean[][] nextGen = new boolean[board.length][board.length];
-        for (int j = 0; j < board.length; j++) {
-            for (int i = 0; i < board.length; i++) {
-                nextGen[i][j] = determineCellLiveliness(i , j);
+        for (int row = 0; row < board.length; row++) {
+            for (int column = 0; column < board[row].length; column++) {
+                nextGen[row][column] = determineCellLiveliness(row, column);
             }
         }
         board = nextGen;
     }
 
-    private boolean determineCellLiveliness(int x, int y) {
-        int neighbourCount = countCellNeighbours(x, y);
-        return isCellAlive(x, y) && neighbourCount >= 2;
+    private boolean determineCellLiveliness(int row, int column) {
+        int neighbourCount = countCellNeighbours(row, column);
+        return isCellAlive(row, column) && neighbourCount >= 2;
     }
 
-    private int countCellNeighbours(int x, int y) {
+    private int countCellNeighbours(int row, int column) {
         int count = 0;
-        for (int neighbourY = y - 1; neighbourY <= y + 1; neighbourY++) {
-            for (int neighbourX = x - 1; neighbourX <= x + 1; neighbourX++) {
+        for (int neighbourRow = row - 1; neighbourRow <= row + 1; neighbourRow++) {
+            for (int neighbourColumn = column - 1; neighbourColumn <= column + 1; neighbourColumn++) {
 
-                if (neighbourX == x && neighbourY == y) {
+                if (neighbourRow == row && neighbourColumn == column) {
                     continue;
                 }
-                if (isCellInsideBoard(neighbourX, neighbourY) && isCellAlive(neighbourX, neighbourY)) {
+                if (isCellInsideBoard(neighbourRow, neighbourColumn) && isCellAlive(neighbourRow, neighbourColumn)) {
                     count++;
                 }
 
@@ -44,11 +44,11 @@ class GameOfLife {
         return count;
     }
 
-    private boolean isCellInsideBoard(int x, int y) {
-        return x >= 0 && y >= 0 && x < board.length && y < board.length;
+    private boolean isCellInsideBoard(int row, int column) {
+        return row >= 0 && column >= 0 && row < board.length && column < board[row].length;
     }
 
-    private boolean isCellAlive(int x, int y) {
-        return board[x][y];
+    private boolean isCellAlive(int row, int column) {
+        return board[row][column];
     }
 }
