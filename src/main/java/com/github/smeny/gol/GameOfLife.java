@@ -12,7 +12,7 @@ class GameOfLife {
     }
 
     public void nextGen() {
-        boolean[][] nextGen = new boolean[board.length][board.length];
+        var nextGen = new boolean[board.length][board.length];
         for (int row = 0; row < board.length; row++) {
             for (int column = 0; column < board[row].length; column++) {
                 nextGen[row][column] = determineCellLiveliness(row, column);
@@ -23,7 +23,7 @@ class GameOfLife {
 
     private boolean determineCellLiveliness(int row, int column) {
         int neighbourCount = countCellNeighbours(row, column);
-        return isCellAlive(row, column) && neighbourCount >= 2;
+        return isCellAlive(row, column) && neighbourCount >= 2 && neighbourCount <= 3;
     }
 
     private int countCellNeighbours(int row, int column) {
